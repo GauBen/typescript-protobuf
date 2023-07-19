@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+message Message {
+  required string username = 1;
+  string body = 2;
+}
+
+message Join {
+  string username = 1;
+}
+
+message Leave {
+  string username = 1;
+}
