@@ -1,7 +1,7 @@
 import express from "express";
 import { fileURLToPath } from "node:url";
 import * as bus from "./bus.js";
-import { Leave, Message } from "./proto/chat_pb.js";
+import { Message } from "./proto/chat_pb.js";
 
 const app = express();
 
