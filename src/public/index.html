@@ -35,7 +35,7 @@
       $form.addEventListener("submit", async (event) => {
         event.preventDefault();
         const formData = new FormData($form);
-        await fetch("/send", {
+        await fetch("/post", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(Object.fromEntries(formData)),
