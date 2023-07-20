@@ -3,7 +3,14 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
+import type {
+  BinaryReadOptions,
+  FieldList,
+  JsonReadOptions,
+  JsonValue,
+  PartialMessage,
+  PlainMessage,
+} from "@bufbuild/protobuf";
 import { Message as Message$1, proto3 } from "@bufbuild/protobuf";
 
 /**
@@ -11,9 +18,9 @@ import { Message as Message$1, proto3 } from "@bufbuild/protobuf";
  */
 export class Message extends Message$1<Message> {
   /**
-   * @generated from field: string username = 1;
+   * @generated from field: string author = 1;
    */
-  username = "";
+  author = "";
 
   /**
    * @generated from field: string body = 2;
@@ -28,98 +35,35 @@ export class Message extends Message$1<Message> {
   static readonly runtime: typeof proto3 = proto3;
   static readonly typeName = "Message";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "username", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 1, name: "author", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "body", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ]);
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Message {
+  static fromBinary(
+    bytes: Uint8Array,
+    options?: Partial<BinaryReadOptions>
+  ): Message {
     return new Message().fromBinary(bytes, options);
   }
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Message {
+  static fromJson(
+    jsonValue: JsonValue,
+    options?: Partial<JsonReadOptions>
+  ): Message {
     return new Message().fromJson(jsonValue, options);
   }
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Message {
+  static fromJsonString(
+    jsonString: string,
+    options?: Partial<JsonReadOptions>
+  ): Message {
     return new Message().fromJsonString(jsonString, options);
   }
 
-  static equals(a: Message | PlainMessage<Message> | undefined, b: Message | PlainMessage<Message> | undefined): boolean {
+  static equals(
+    a: Message | PlainMessage<Message> | undefined,
+    b: Message | PlainMessage<Message> | undefined
+  ): boolean {
     return proto3.util.equals(Message, a, b);
   }
 }
-
-/**
- * @generated from message Join
- */
-export class Join extends Message$1<Join> {
-  /**
-   * @generated from field: string username = 1;
-   */
-  username = "";
-
-  constructor(data?: PartialMessage<Join>) {
-    super();
-    proto3.util.initPartial(data, this);
-  }
-
-  static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "Join";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "username", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-  ]);
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Join {
-    return new Join().fromBinary(bytes, options);
-  }
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Join {
-    return new Join().fromJson(jsonValue, options);
-  }
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Join {
-    return new Join().fromJsonString(jsonString, options);
-  }
-
-  static equals(a: Join | PlainMessage<Join> | undefined, b: Join | PlainMessage<Join> | undefined): boolean {
-    return proto3.util.equals(Join, a, b);
-  }
-}
-
-/**
- * @generated from message Leave
- */
-export class Leave extends Message$1<Leave> {
-  /**
-   * @generated from field: string username = 1;
-   */
-  username = "";
-
-  constructor(data?: PartialMessage<Leave>) {
-    super();
-    proto3.util.initPartial(data, this);
-  }
-
-  static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "Leave";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "username", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-  ]);
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Leave {
-    return new Leave().fromBinary(bytes, options);
-  }
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Leave {
-    return new Leave().fromJson(jsonValue, options);
-  }
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Leave {
-    return new Leave().fromJsonString(jsonString, options);
-  }
-
-  static equals(a: Leave | PlainMessage<Leave> | undefined, b: Leave | PlainMessage<Leave> | undefined): boolean {
-    return proto3.util.equals(Leave, a, b);
-  }
-}
-

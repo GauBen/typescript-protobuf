@@ -8,70 +8,39 @@
   </head>
   <body>
     <h1>Protobuf Chat</h1>
-    <div id="login">
-      <form>
-        <p>
-          <label>Username: <input type="text" required /></label>
-        </p>
-        <p>
-          <button type="submit">Join</button>
-        </p>
-      </form>
-    </div>
-    <div id="chat" hidden>
-      <section></section>
-      <form>
-        <input type="text" required />
-        <button type="submit">Send</button>
-      </form>
-    </div>
+    <section id="chat"></section>
+    <form>
+      <input type="text" name="author" placeholder="User name" required />
+      <input type="text" name="body" placeholder="Message" required />
+      <button type="submit">Send</button>
+    </form>
     <script>
-      const $login = document.querySelector("#login");
       const $chat = document.querySelector("#chat");
-      let username = "";
+      const $form = document.querySelector("form");
 
-      const $loginForm = $login.querySelector("form");
-      $loginForm.addEventListener("submit", async (event) => {
-        event.preventDefault();
-        username = $loginForm.querySelector("input").value;
-        $login.hidden = true;
-        $chat.hidden = false;
+      const source = new EventSource("/messages");
+      source.addEventListener("message", (event) => {
+        // Retrieve the author and body from the event data
+        const { author, body } = JSON.parse(event.data);
 
-        const source = new EventSource(`/messages?username=${username}`);
-        source.addEventListener("message", (event) => {
-          const message = JSON.parse(event.data);
-          const $message = document.createElement("article");
-          $message.innerHTML = `<strong>${message.username}</strong>: ${message.body}`;
-          const $section = $chat.querySelector("section");
-          $section.append($message);
-          $section.scrollTop = $section.scrollHeight;
-        });
-        source.addEventListener("join", (event) => {
-          const $message = document.createElement("div");
-          $message.innerHTML = `<strong>${event.data}</strong> joined the chat`;
-          const $section = $chat.querySelector("section");
-          $section.append($message);
-          $section.scrollTop = $section.scrollHeight;
-        });
-        source.addEventListener("leave", (event) => {
-          const $message = document.createElement("div");
-          $message.innerHTML = `<strong>${event.data}</strong> left the chat`;
-          const $section = $chat.querySelector("section");
-          $section.append($message);
-          $section.scrollTop = $section.scrollHeight;
-        });
+        // Append the message to the chat
+        const $message = document.createElement("article");
+        const $author = document.createElement("strong");
+        $author.textContent = author;
+        $message.append($author, ": ", body);
+        $chat.append($message);
+        $chat.scrollTop = $chat.scrollHeight;
       });
 
-      const $chatForm = $chat.querySelector("form");
-      $chatForm.addEventListener("submit", async (event) => {
+      $form.addEventListener("submit", async (event) => {
         event.preventDefault();
-        const body = $chatForm.querySelector("input").value;
+        const formData = new FormData($form);
         await fetch("/send", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ username, body }),
+          body: JSON.stringify(Object.fromEntries(formData)),
         });
-        $chatForm.reset();
+        $form.elements.body.value = "";
       });
     </script>
   </body>

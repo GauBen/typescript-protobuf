@@ -13,28 +13,7 @@ h1 {
   color: #fff;
 }
 
-#login {
-  flex-grow: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-#login form {
-  border-radius: 0.5em;
-  box-shadow: 0 0 1em #3338;
-  padding: 0 1em;
-  overflow: hidden;
-  text-align: center;
-}
-
 #chat {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-#chat section {
   flex-grow: 1;
   flex-basis: 0;
   display: flex;
@@ -51,17 +30,17 @@ h1 {
   border-radius: 0.5em;
 }
 
-#chat form {
+form {
   display: flex;
   gap: 0.5em;
   padding: 0.5em;
 }
 
-#chat input {
-  flex: 1;
+input,
+button {
   padding: 0.5em;
 }
 
-[hidden] {
-  display: none !important;
+input[name="body"] {
+  flex: 1;
 }
