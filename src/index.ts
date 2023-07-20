@@ -10,7 +10,7 @@ app.get("/messages", (req, res) => {
   res.setHeader("Content-Type", "text/event-stream");
 
   const removeListener = broker.listen((message) => {
-    // Here, message is guarented to have all the props we need
+    // Here, message is guaranteed to have all the props we need
     res.write(`data: ${JSON.stringify(message)}\r\n\r\n`);
   });
 
@@ -24,7 +24,6 @@ app.post("/post", express.json(), (req, res) => {
     const message = Message.fromJson(req.body);
 
     broker.emit(message);
-    console.log(message.author + ":", message.body);
     res.sendStatus(204);
   } catch (error) {
     // Protobuf runtime will throw an error if the message is invalid
